@@ -1,0 +1,16 @@
+[
+  {"question": "How long does a temporary card freeze take to apply?", "expected_doc_id": "doc_freeze_policy"},
+  {"question": "Can a customer unfreeze their own card?", "expected_doc_id": "doc_freeze_policy"},
+  {"question": "Is there a fee for freezing a card?", "expected_doc_id": "doc_freeze_policy"},
+  {"question": "Who can approve reversing a completed transaction?", "expected_doc_id": "doc_fraud_escalation"},
+  {"question": "How quickly is an escalated fraud case assigned during business hours?", "expected_doc_id": "doc_fraud_escalation"},
+  {"question": "Are automated systems allowed to close an account?", "expected_doc_id": "doc_fraud_escalation"},
+  {"question": "When did banks become liable for SMS OTP fraud losses?", "expected_doc_id": "doc_otp_regulation"},
+  {"question": "By what date must SMS one-time-passcodes be phased out?", "expected_doc_id": "doc_otp_regulation"},
+  {"question": "What are approved replacements for SMS OTP authentication?", "expected_doc_id": "doc_otp_regulation"},
+  {"question": "What languages must be offered at minimum on customer calls?", "expected_doc_id": "doc_multilingual_support"},
+  {"question": "How often is the supported language list reviewed?", "expected_doc_id": "doc_multilingual_support"},
+  {"question": "How long are call recordings retained?", "expected_doc_id": "doc_recording_retention"},
+  {"question": "Who can access call recordings?", "expected_doc_id": "doc_recording_retention"},
+  {"question": "Must every automated agent call be transcribed?", "expected_doc_id": "doc_recording_retention"}
+]
