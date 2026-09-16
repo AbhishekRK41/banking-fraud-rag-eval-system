@@ -1,0 +1,1 @@
+Call Recording and Retention. Every customer call handled by an automated agent must be recorded and transcribed in full. Recordings and transcripts are retained for a minimum of seven years to support audit and regulatory review. Access to recordings is restricted to compliance, fraud, and audit personnel, and every access is itself logged.
