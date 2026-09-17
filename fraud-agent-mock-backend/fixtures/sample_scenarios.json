@@ -1,0 +1,111 @@
+{
+  "scenario_1_clean_happy_path": {
+    "description": "Customer doesn't recognize the transaction, no other risk signals. Expected: freeze_card, no escalation.",
+    "risk_context": {
+      "event_type": "anomalous_payment",
+      "transaction_id": "txn_101",
+      "amount": 950,
+      "currency": "AED",
+      "merchant_or_payee": "Online Electronics Store",
+      "channel": "ecommerce",
+      "device_change_detected": false,
+      "geo_anomaly_detected": false,
+      "risk_score": 0.55,
+      "reason_codes": ["unusual_merchant_category"],
+      "customer_id": "cust_demo_1",
+      "preferred_language": "en"
+    },
+    "evidence": {
+      "transaction_recognized": false,
+      "otp_disclosed": false,
+      "active_impersonation_claimed": false,
+      "card_possession_confirmed": true
+    },
+    "expected_decision": {
+      "authorized_actions": ["freeze_card"],
+      "requires_human_escalation": false
+    }
+  },
+  "scenario_2_otp_disclosure_escalation": {
+    "description": "Customer already shared an OTP with someone claiming to be the bank. Expected: freeze_card AND mandatory escalation.",
+    "risk_context": {
+      "event_type": "anomalous_payment",
+      "transaction_id": "txn_102",
+      "amount": 4800,
+      "currency": "AED",
+      "merchant_or_payee": "Unknown Merchant LLC",
+      "channel": "ecommerce",
+      "device_change_detected": true,
+      "geo_anomaly_detected": true,
+      "risk_score": 0.91,
+      "reason_codes": ["new_device", "geo_mismatch", "high_amount"],
+      "customer_id": "cust_demo_2",
+      "preferred_language": "ar"
+    },
+    "evidence": {
+      "transaction_recognized": false,
+      "otp_disclosed": true,
+      "active_impersonation_claimed": true,
+      "card_possession_confirmed": true
+    },
+    "expected_decision": {
+      "authorized_actions": ["freeze_card"],
+      "requires_human_escalation": true
+    }
+  },
+  "scenario_3_false_alarm": {
+    "description": "Customer recognizes the transaction — it was them. Expected: no action, no escalation.",
+    "risk_context": {
+      "event_type": "suspicious_login",
+      "transaction_id": "txn_103",
+      "amount": 320,
+      "currency": "AED",
+      "merchant_or_payee": "Supermarket",
+      "channel": "pos",
+      "device_change_detected": false,
+      "geo_anomaly_detected": false,
+      "risk_score": 0.4,
+      "reason_codes": ["velocity_check"],
+      "customer_id": "cust_demo_3",
+      "preferred_language": "en"
+    },
+    "evidence": {
+      "transaction_recognized": true,
+      "otp_disclosed": false,
+      "active_impersonation_claimed": false,
+      "card_possession_confirmed": true
+    },
+    "expected_decision": {
+      "authorized_actions": [],
+      "requires_human_escalation": false
+    }
+  },
+  "scenario_4_adversarial_unverified_caller": {
+    "description": "Verification fails (simulates an attacker who cannot pass the bank's out-of-band challenge). Expected: no action, mandatory escalation, regardless of what the caller claims.",
+    "risk_context": {
+      "event_type": "stolen_card_suspected",
+      "transaction_id": "txn_104",
+      "amount": 6200,
+      "currency": "AED",
+      "merchant_or_payee": "Electronics Wholesaler",
+      "channel": "pos",
+      "device_change_detected": false,
+      "geo_anomaly_detected": true,
+      "risk_score": 0.95,
+      "reason_codes": ["geo_mismatch", "high_amount", "new_merchant"],
+      "customer_id": "cust_demo_4",
+      "preferred_language": "en"
+    },
+    "evidence": {
+      "transaction_recognized": false,
+      "otp_disclosed": false,
+      "active_impersonation_claimed": false,
+      "card_possession_confirmed": null
+    },
+    "verification_forced_to_fail": true,
+    "expected_decision": {
+      "authorized_actions": [],
+      "requires_human_escalation": true
+    }
+  }
+}
