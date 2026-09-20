@@ -1,8 +1,12 @@
-# RAG Evaluation System
+# Banking Fraud RAG Evaluation System
 
 A small, self-contained retrieval-augmented pipeline with a real evaluation harness comparing chunking and retrieval strategies head-to-head. Built to demonstrate engineering practice — chunking strategy design, retrieval benchmarking, a tested FastAPI service, Docker packaging, and CI — not to claim state-of-the-art retrieval quality.
 
 **What this is (and isn't):** retrieval is TF-IDF / BM25 (classic sparse methods), and "generation" is extractive — it returns the best-matching source chunk verbatim rather than calling an LLM. That's a deliberate choice: the whole thing runs offline, with no API key, so a CI pipeline (or anyone cloning this) can run it end to end with nothing but `pip install`.
+
+## Also in this repository
+
+[`fraud-agent-mock-backend/`](./fraud-agent-mock-backend) is a separate, self-contained FastAPI project: mocked verification, policy-evaluation and action services for a voice-agent fraud-intervention demo (Ignyte x ElevenLabs hackathon, Banking & Insurance track). It has its own README, tests and Dockerfile. Everything below describes the RAG evaluation project at the repository root.
 
 ## Results
 
@@ -60,8 +64,8 @@ python -m eval.run_eval
 
 **Docker:**
 ```bash
-docker build -t rag-eval-system .
-docker run -p 8000:8000 rag-eval-system
+docker build -t banking-fraud-rag-eval-system .
+docker run -p 8000:8000 banking-fraud-rag-eval-system
 ```
 *(Dockerfile follows a standard `python:3.11-slim` + pip-install pattern; not build-verified in the environment this repo was authored in — verify locally before relying on it.)*
 
